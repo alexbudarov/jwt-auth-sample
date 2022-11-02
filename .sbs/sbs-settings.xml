@@ -2,5 +2,6 @@
 <project version="4">
   <component name="SpringBootStudioConfig">
     <option name="jpaConfigPersistentUnitInitialized" value="true" />
+    <option name="devtoolsMode" value="OFF" />
   </component>
 </project>
