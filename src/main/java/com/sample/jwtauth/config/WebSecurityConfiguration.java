@@ -1,5 +1,6 @@
 package com.sample.jwtauth.config;
 
+import com.amplicode.core.auth.AuthenticationInfoProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -10,6 +11,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfiguration {
+
+    @Bean
+    public AuthenticationInfoProvider authenticationInfoProvider() {
+        return new JwtAuthInfoProvider();
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -32,4 +38,5 @@ public class WebSecurityConfiguration {
                 .disable());
         return http.build();
     }
+
 }
