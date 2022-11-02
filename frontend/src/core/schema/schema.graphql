@@ -1,0 +1,142 @@
+# THIS FILE WAS GENERATED AUTOMATICALLY. DO NOT EDIT.
+directive @negativeOrZero on INPUT_FIELD_DEFINITION
+
+directive @notBlank on INPUT_FIELD_DEFINITION
+
+directive @futureOrPresent on INPUT_FIELD_DEFINITION
+
+directive @past on INPUT_FIELD_DEFINITION
+
+directive @pastOrPresent on INPUT_FIELD_DEFINITION
+
+directive @positiveOrZero on INPUT_FIELD_DEFINITION
+
+directive @javaType(name: String!) on SCALAR
+
+directive @size(max: Int = 2147483647, min: Int = 0) on INPUT_FIELD_DEFINITION
+
+directive @null on INPUT_FIELD_DEFINITION
+
+directive @notEmpty on INPUT_FIELD_DEFINITION
+
+directive @assertFalse on INPUT_FIELD_DEFINITION
+
+directive @pattern(regexp: String!) on INPUT_FIELD_DEFINITION
+
+directive @negative on INPUT_FIELD_DEFINITION
+
+directive @min(value: Long!) on INPUT_FIELD_DEFINITION
+
+directive @assertTrue on INPUT_FIELD_DEFINITION
+
+directive @email(regexp: String = ".*") on INPUT_FIELD_DEFINITION
+
+directive @max(value: Long!) on INPUT_FIELD_DEFINITION
+
+directive @length(max: Int = 2147483647, min: Int = 0) on INPUT_FIELD_DEFINITION
+
+directive @positive on INPUT_FIELD_DEFINITION
+
+directive @url on INPUT_FIELD_DEFINITION
+
+directive @decimalMax(inclusive: Boolean = true, value: String!) on INPUT_FIELD_DEFINITION
+
+directive @future on INPUT_FIELD_DEFINITION
+
+directive @digits(fraction: Int!, integer: Int!) on INPUT_FIELD_DEFINITION
+
+directive @decimalMin(inclusive: Boolean = true, value: String!) on INPUT_FIELD_DEFINITION
+
+# Mutation root
+type Mutation {
+  deleteTicket(id: ID!): Void
+  updateTicket(input: TicketInput!): Ticket!
+}
+
+# Query root
+type Query {
+  ticket(id: ID!): Ticket!
+  ticketList(filter: TicketFilterInput, page: OffsetPageInput, sort: [TicketOrderByInput]): TicketResultPage!
+  userInfo: UserInfo
+}
+
+type Ticket {
+  airline: String
+  airportFrom: String
+  departureDate: DateTime
+  id: ID
+  number: String
+  price: BigDecimal
+}
+
+type TicketResultPage {
+  content: [Ticket]
+  totalElements: Long!
+}
+
+type UserInfo {
+  username: String
+}
+
+enum SortDirection {
+  ASC
+  DESC
+}
+
+enum TicketOrderByProperty {
+  AIRLINE
+  AIRPORT_FROM
+  DEPARTURE_DATE
+  NUMBER
+  PRICE
+}
+
+scalar BigDecimal
+
+scalar BigInteger
+
+scalar Date
+
+scalar DateTime
+
+scalar LocalDateTime
+
+scalar LocalTime
+
+scalar Long
+
+scalar Time
+
+scalar Timestamp
+
+scalar Url
+
+scalar Void
+
+input OffsetPageInput {
+  number: Int!
+  size: Int!
+}
+
+input TicketFilterInput {
+  departureDateMax: DateTime
+  departureDateMin: DateTime
+  number: String
+  priceMax: BigDecimal
+  priceMin: BigDecimal
+}
+
+input TicketInput {
+  airline: String
+  airportFrom: String
+  departureDate: DateTime
+  id: ID
+  number: String
+  price: BigDecimal
+}
+
+input TicketOrderByInput {
+  direction: SortDirection
+  property: TicketOrderByProperty
+}
+

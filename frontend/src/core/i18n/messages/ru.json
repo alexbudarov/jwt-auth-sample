@@ -1,0 +1,73 @@
+{
+  "common.ok": "OK",
+  "common.cancel": "Отмена",
+  "common.close": "Закрыть",
+  "common.create": "Создать",
+  "common.edit": "Изменить",
+  "common.open": "Открыть",
+  "common.remove": "Удалить",
+  "common.submit": "ОК",
+  "common.next": "Следующий",
+  "common.back": "Назад",
+  "common.previous": "Предыдущий",
+  "common.requestFailed": "Не удалось выполнить операцию",
+  "common.notAllowed": "У вас недостаточно прав для выполнения этой операции",
+  "common.viewDetails": "Посмотреть подробности",
+  "common.404": "Извините, мы не смогли найти страницу, которую вы искали",
+  "common.unknownAppError": "Что-то пошло не так. Пожалуйста, обновите страницу и попробуйте ещё раз.",
+
+  "auth.login.submit": "Войти",
+  "auth.login.unauthorized": "Не удалось войти. Пользователь не существует или пароль неверный",
+  "auth.login.unknownError": "Не удалось войти",
+  "auth.logout.confirm": "Вы действительно хотите выйти?",
+  "auth.logout.unknownError": "Не удалось войти",
+  "auth.signingIn": "Вход...",
+  "auth.signingOut": "Выход...",
+  "auth.loading": "Загрузка...",
+  "auth.failed": "Ошибка аутентификации",
+  "auth.redirectAfterLogin": "Вы вошли. Перенаправляем...",
+  "auth.expired": "Сессия истекла, пожалуйста войдите снова",
+
+  "EntityListScreen.deleteConfirmation": "Вы уверены, что хотите удалить эту запись?",
+  "EntityDetailsScreen.savedSuccessfully": "Запись успешно сохранена",
+  "EntityDetailsScreen.deletedSuccessfully": "Запись успешно удалена",
+  "EntityDetailsScreen.validationError": "Ошибка валидации. Пожалуйста, проверьте данные, которые вы ввели",
+  "EntityLookupField.selectEntityInstance": "Выберите {label}",
+
+  "screen.home": "Главная страница",
+  "home.welcome": "Добро пожаловать в {appName}!",
+  "home.loggedInAs": "Вы вошли как {userName}",
+
+  "filters.apply": "Применить",
+  "filters.reset": "Сбросить",
+  "filters.showAll": "Показать все",
+  "filters.collapse": "Скрыть",
+
+  "form.validation.assertTrue": "Должно быть равно true",
+  "form.validation.assertFalse": "Должно быть равно false",
+
+  "form.validation.futureDate": "Должно содержать дату, которая еще не наступила",
+  "form.validation.futureInstant": "Должно содержать момент времени, который ещё не наступил",
+  "form.validation.futureOrPresentDate": "Должно содержать сегодняшнее число или дату, которая еще не наступила",
+  "form.validation.futureOrPresentInstant": "Должно содержать текущий момент времени, либо момент времени, который ещё не наступил",
+  "form.validation.pastDate": "Должно содержать прошедшую дату",
+  "form.validation.pastInstant": "Должно содержать прошедший момент времени",
+  "form.validation.pastOrPresentDate": "Должно содержать прошедшую дату или сегодняшнее число",
+  "form.validation.pastOrPresentInstant": "Должно содержать текущий момент времени, либо момент времени в прошлом",
+
+  "form.validation.negative": "Должно быть отрицательным числом",
+  "form.validation.negativeOrZero": "Должно быть отрицательным числом или нулем",
+  "form.validation.positive": "Должно быть положительным числом",
+  "form.validation.positiveOrZero": "Должно быть положительным числом или нулем",
+
+  "form.validation.greaterThanMin": "Должно быть больше {min}",
+  "form.validation.greaterThanOrEqualMin": "Должно быть больше или равно {min}",
+  "form.validation.lessThanMax": "Должно быть меньше {max}",
+  "form.validation.lessThanOrEqualMax": "Должно быть меньше или равно {max}",
+
+  "form.validation.digits": "Число вне допустимого диапазона (ожидалось <{integer} разрядов>.<{fraction} разрядов>)",
+
+  "form.validation.null": "Должно равняться null",
+
+  "sort.sortBy": "Сортировать по"
+}
