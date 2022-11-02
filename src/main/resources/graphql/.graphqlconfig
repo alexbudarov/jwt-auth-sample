@@ -1,0 +1,4 @@
+{
+  "name": "Application GraphQL Schema",
+  "schemaPath": "schema.graphqls"
+}
