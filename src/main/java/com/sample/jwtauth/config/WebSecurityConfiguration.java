@@ -7,6 +7,8 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
@@ -17,6 +19,18 @@ public class WebSecurityConfiguration {
     @Bean
     public AuthenticationInfoProvider authenticationInfoProvider() {
         return new JwtAuthInfoProvider();
+    }
+
+    @Bean
+    public JwtAuthenticationConverter jwtAuthenticationConverter() {
+        JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+        grantedAuthoritiesConverter.setAuthoritiesClaimName("roles");
+        grantedAuthoritiesConverter.setAuthorityPrefix("ROLE_");
+
+        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
+
+        return jwtAuthenticationConverter;
     }
 
     @Bean
@@ -31,7 +45,7 @@ public class WebSecurityConfiguration {
         http.headers(Customizer.withDefaults());
         //JWT Token
         http.oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer
-                .jwt(Customizer.withDefaults())
+                .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
         );
         //Anonymous
         http.anonymous(Customizer.withDefaults());
