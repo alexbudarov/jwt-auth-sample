@@ -1,6 +1,7 @@
 package com.sample.jwtauth.config;
 
 import com.amplicode.core.auth.AuthenticationInfoProvider;
+import com.amplicode.core.auth.JwtAuthenticationInfoProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -18,7 +19,7 @@ public class WebSecurityConfiguration {
 
     @Bean
     public AuthenticationInfoProvider authenticationInfoProvider() {
-        return new JwtAuthInfoProvider();
+        return new JwtAuthenticationInfoProvider();
     }
 
     @Bean
