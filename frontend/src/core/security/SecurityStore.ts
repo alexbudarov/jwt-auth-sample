@@ -1,48 +1,32 @@
 import { action, makeObservable, observable } from "mobx";
-import axios from "axios";
-import qs from "qs";
-import { LOGOUT_URI, LOGIN_URI } from "../../config";
 import { ApolloClient, gql } from "@apollo/client";
+import { AuthContextProps } from "react-oidc-context";
+import { ID_TOKEN_STORAGE_KEY } from "./oidcConfig";
 
 export class SecurityStore {
-  @observable isLoggedIn: boolean = true;
   @observable userName: string | null = null;
 
-  constructor(private client: ApolloClient<unknown>) {
+  constructor(
+    private client: ApolloClient<unknown>,
+    private auth: AuthContextProps
+  ) {
     makeObservable(this);
   }
 
   @action
-  login = async (username: string, password: string) => {
-    const response = await axios(LOGIN_URI, {
-      method: "POST",
-      headers: { "content-type": "application/x-www-form-urlencoded" },
-      data: qs.stringify({
-        username,
-        password
-      })
-    });
-
-    if (response.status === 200) {
-      this.isLoggedIn = true;
-    }
-
-    return response;
+  login = async () => {
+    await this.auth.signinRedirect();
   };
 
   @action
   logout = async () => {
-    this.isLoggedIn = false;
-
-    const response = await axios(LOGOUT_URI, {
-      method: "POST"
-    });
-
-    return response;
+    const post_logout_redirect_uri = window.location.href;
+    await localStorage.removeItem(ID_TOKEN_STORAGE_KEY);
+    await this.auth.signoutRedirect({ post_logout_redirect_uri });
   };
 
   @action
-  initialize = (): Promise<void> => {
+  checkSession = async (): Promise<void> => {
     return this.client
       .query({
         query: gql`
@@ -59,12 +43,11 @@ export class SecurityStore {
             userInfo: { username }
           } = resp.data;
           this.userName = username;
-          this.isLoggedIn = true;
         })
       )
       .catch(
-        action(() => {
-          this.isLoggedIn = false;
+        action(async () => {
+          await this.logout();
         })
       );
   };
