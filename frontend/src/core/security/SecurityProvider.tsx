@@ -55,6 +55,8 @@ function OIDCAuthProvider({ children }: PropsWithChildren<unknown>) {
   );
   const authPath = resolvePath("auth").pathname;
   const redirect_uri = `${window.location.origin}${authPath}?return_path=${return_path}`;
+  console.log("return_path: " + return_path)
+  console.log("redirect_uri: " + redirect_uri)
 
   const navigate = useNavigate();
   const handleSignin = useCallback(
@@ -66,6 +68,7 @@ function OIDCAuthProvider({ children }: PropsWithChildren<unknown>) {
       const navigateTarget = new URLSearchParams(window.location.search).get(
         "return_path"
       );
+      console.log("handleSignin: navigateTarget: " + navigateTarget)
       if (navigateTarget == null) {
         console.error(
           "Redirect URI does not contain return_path. Navigating to root path."
@@ -73,7 +76,9 @@ function OIDCAuthProvider({ children }: PropsWithChildren<unknown>) {
         navigate("/");
         return;
       }
-      navigate(decodeURIComponent(navigateTarget));
+      let decodedTarget = decodeURIComponent(navigateTarget);
+      console.log("handleSignin: decodedTarget: " + decodedTarget)
+      navigate(decodedTarget);
     },
     [navigate]
   );
@@ -83,6 +88,9 @@ function OIDCAuthProvider({ children }: PropsWithChildren<unknown>) {
       {...oidcConfig}
       redirect_uri={redirect_uri}
       onSigninCallback={handleSignin}
+      metadataSeed={{
+          end_session_endpoint: oidcConfig.end_session_endpoint
+    }}
     >
       {children}
     </AuthProvider>

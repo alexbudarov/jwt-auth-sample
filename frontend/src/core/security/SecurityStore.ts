@@ -15,6 +15,7 @@ export class SecurityStore {
 
   @action
   login = async () => {
+    console.log("signinRedirect()")
     await this.auth.signinRedirect();
   };
 
@@ -27,6 +28,7 @@ export class SecurityStore {
 
   @action
   checkSession = async (): Promise<void> => {
+    console.log("checkSession()")
     return this.client
       .query({
         query: gql`
@@ -39,6 +41,7 @@ export class SecurityStore {
       })
       .then(
         action(resp => {
+          console.log("userInfo() response: " + resp.data)
           const {
             userInfo: { username }
           } = resp.data;
@@ -47,6 +50,7 @@ export class SecurityStore {
       )
       .catch(
         action(async () => {
+          console.log("userInfo() exception");
           await this.logout();
         })
       );
