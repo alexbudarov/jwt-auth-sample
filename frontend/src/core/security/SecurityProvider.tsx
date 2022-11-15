@@ -83,6 +83,9 @@ function OIDCAuthProvider({ children }: PropsWithChildren<unknown>) {
       {...oidcConfig}
       redirect_uri={redirect_uri}
       onSigninCallback={handleSignin}
+      metadataSeed={{
+        end_session_endpoint: oidcConfig.end_session_endpoint
+      }}
     >
       {children}
     </AuthProvider>
