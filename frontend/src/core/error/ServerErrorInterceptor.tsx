@@ -1,10 +1,10 @@
 import { ServerErrorEvents } from "./ServerErrorEvents";
 import { ErrorHandler } from "@apollo/client/link/error";
-import { useSecurity } from "../security/useSecurity";
 import { useEffect } from "react";
 import { notification } from "antd";
 import { useIntl } from "react-intl";
 import { EventEmitter } from "@amplicode/react";
+import { useSecurity } from "../security/useSecurity";
 
 export interface ServerErrorInterceptorProps {
   serverErrorEmitter: EventEmitter<ServerErrorEvents>;
@@ -36,7 +36,7 @@ export function ServerErrorInterceptor({
             err => err.extensions?.classification === "UNAUTHORIZED"
           )
         ) {
-          security.logout();
+          void security.logout();
           return;
         }
 
@@ -56,11 +56,13 @@ export function ServerErrorInterceptor({
         return;
       }
       if (networkError.statusCode === 401) {
-        security.logout();
+        // noop
       }
     };
 
-    const unauthorizedHandler = () => security.logout();
+    const unauthorizedHandler = () => {
+      /* noop */
+    };
 
     serverErrorEmitter.on("graphQLError", graphQLErrorHandler);
     serverErrorEmitter.on("unauthorized", unauthorizedHandler);

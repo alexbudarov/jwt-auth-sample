@@ -5,7 +5,7 @@ const PORT = "8080";
 const SERVER_URL = "http://localhost";
 const BASE_URL = process.env.BASE_URL ?? "/";
 // Do not inline or change this variable as it can be changed by Amplicode Studio code generation.
-const AMPLICODE_ENDPOINTS = "graphql|login|logout";
+const AMPLICODE_ENDPOINTS = "graphql";
 
 export default defineConfig({
   assetsInclude: ["**/*.graphql"],
