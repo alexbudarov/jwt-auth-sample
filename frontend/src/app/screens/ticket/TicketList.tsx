@@ -104,6 +104,12 @@ const columns = [
 
 const DEFAULT_PAGE_SIZE = 10;
 
+const USER_ROLES_TICKET_LIST = gql(`
+query UserRoles_TicketList {
+    userRoles
+}
+`);
+
 export function TicketList() {
   const intl = useIntl();
   useBreadcrumbItem(intl.formatMessage({ id: "screen.TicketList" }));
@@ -342,6 +348,10 @@ function ButtonPanel({
 
   const { showDeleteConfirm, deleting } = useDeleteConfirm(selectedRowId!);
 
+  const {data: userRolesData} = useQuery(USER_ROLES_TICKET_LIST);
+  const roles = userRolesData?.userRoles ?? []
+  const deleteAllowed = roles.find(s => s === "ADMIN")
+
   return (
     <Row justify="space-between" gutter={[16, 8]}>
       <Col>
@@ -373,12 +383,14 @@ function ButtonPanel({
             htmlType="button"
             key="remove"
             title={intl.formatMessage({ id: "common.remove" })}
+            type={deleteAllowed ? "default" : "dashed"}
             disabled={selectedRowId == null}
             loading={deleting}
             onClick={showDeleteConfirm}
           >
             <span>
               <FormattedMessage id="common.remove" />
+              {(deleteAllowed ? "" : " (forbidden)")}
             </span>
           </Button>
         </Space>

@@ -55,6 +55,7 @@ export type Query = {
   ticket: Ticket;
   ticketList: TicketResultPage;
   userInfo?: Maybe<UserInfo>;
+  userRoles: Array<Maybe<Scalars["String"]>>;
 };
 
 export type QueryTicketArgs = {
@@ -189,6 +190,15 @@ export type DeleteTicket_TicketListMutationVariables = Exact<{
 export type DeleteTicket_TicketListMutation = {
   __typename?: "Mutation";
   deleteTicket?: any | null;
+};
+
+export type UserRoles_TicketListQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type UserRoles_TicketListQuery = {
+  __typename?: "Query";
+  userRoles: Array<string | null>;
 };
 
 export const Ticket_TicketListDocument = {
@@ -466,4 +476,23 @@ export const DeleteTicket_TicketListDocument = {
 } as unknown as DocumentNode<
   DeleteTicket_TicketListMutation,
   DeleteTicket_TicketListMutationVariables
+>;
+export const UserRoles_TicketListDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "UserRoles_TicketList" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "userRoles" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  UserRoles_TicketListQuery,
+  UserRoles_TicketListQueryVariables
 >;

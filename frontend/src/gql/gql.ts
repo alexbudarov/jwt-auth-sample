@@ -11,6 +11,8 @@ const documents = {
     graphql.TicketList_TicketListDocument,
   "\n  mutation DeleteTicket_TicketList($id: ID!) {\n  deleteTicket(id: $id) \n}\n":
     graphql.DeleteTicket_TicketListDocument,
+  "\nquery UserRoles_TicketList {\n    userRoles\n}\n":
+    graphql.UserRoles_TicketListDocument,
 };
 
 export function gql(
@@ -25,6 +27,9 @@ export function gql(
 export function gql(
   source: "\n  mutation DeleteTicket_TicketList($id: ID!) {\n  deleteTicket(id: $id) \n}\n"
 ): typeof documents["\n  mutation DeleteTicket_TicketList($id: ID!) {\n  deleteTicket(id: $id) \n}\n"];
+export function gql(
+  source: "\nquery UserRoles_TicketList {\n    userRoles\n}\n"
+): typeof documents["\nquery UserRoles_TicketList {\n    userRoles\n}\n"];
 
 export function gql(source: string): unknown;
 export function gql(source: string) {
