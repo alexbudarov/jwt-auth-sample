@@ -23,7 +23,7 @@ public class UserInfoController {
     @PreAuthorize("isAuthenticated()")
     @QueryMapping("userInfo")
     public UserInfo userInfo() {
-        String currentUsername = authenticationInfoProvider.getAuthenticatedUsername();
+        String currentUsername = authenticationInfoProvider.getPreferredUsername();
         if (currentUsername != null) {
             return new UserInfo(currentUsername);
         }
